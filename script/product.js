@@ -15,6 +15,7 @@ main.innerHTML = items.map(function(item, index){
 
 function add(index){
     purchased.push(items[index])
+    localStorage.setItem('purchased', JSON.stringify(purchased))
 }
 main.addEventListener('click', function(){
     if(event.target.hasAttribute('data-add')){
@@ -22,3 +23,8 @@ main.addEventListener('click', function(){
         add(event.target.value)
     }
 })
+
+//for search bar
+//let a = items.filter(item =>{
+    //return item.name === 'Nike Shoe'
+//})
