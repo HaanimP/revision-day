@@ -27,15 +27,27 @@ items = JSON.parse(localStorage.getItem('items'))
 
 let table = document.querySelector('table')
 let products = items.map(function(item,index){
-    console.log(item);
-    console.log(index);
+    //console.log(item);
+    //console.log(index);
     return `<tr>
            <td>${item.id}</td>
            <td>${item.name}</td>
            <td>R${item.price}</td>
            <td>${item.description}</td>
-           <td>${item.url}</td>
+           <td><img src="${item.url}"></img></td>
+           <td><button>Edit</button></td>
+           <td><button class="delete">Delete</button></td>
            </tr>`
 })
 
-table.innerHTML = products
+function remove() {
+    alert('clicked ')
+}
+table.innerHTML = products.join('')
+//table.style.display = 'none'
+let deleteButton = document.querySelector('.delete')
+table.addEventListener('click', function(){
+    if(event.target.classList.contains('delete')){
+        remove()
+    }
+})
