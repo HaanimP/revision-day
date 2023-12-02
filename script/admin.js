@@ -21,33 +21,51 @@ let item2 = new Constructor(2, 'Another Nike', 'This is better than the fake', 7
 //pushing items into array
 items.push(object1,item2)
 //sets the array to local storage
+//localStorage.setItem('items',JSON.stringify(items))
+// sets the array from local storage to array(items) in code
+//items = JSON.parse(localStorage.getItem('items'))
+
+let table = document.querySelector('table')
+
+function matthew(){
+    let products = items.map(function(item,index){
+        //console.log(item);
+        //console.log(index);
+        return `<tr>
+            <td>${item.id}</td>
+            <td>${item.name}</td>
+            <td>R${item.price}</td>
+            <td>${item.description}</td>
+            <td><img src="${item.url}"></img></td>
+            <td><button>Edit</button></td>
+            <td><button class="delete" value="${index}">Delete</button></td>
+            </tr>`
+    })
+
+
+table.innerHTML = products.join('')
+}
+matthew()
+//table.style.display = 'none'
+
+function favourite(){
+    //sets the array to local storage
 localStorage.setItem('items',JSON.stringify(items))
 // sets the array from local storage to array(items) in code
 items = JSON.parse(localStorage.getItem('items'))
-
-let table = document.querySelector('table')
-let products = items.map(function(item,index){
-    //console.log(item);
-    //console.log(index);
-    return `<tr>
-           <td>${item.id}</td>
-           <td>${item.name}</td>
-           <td>R${item.price}</td>
-           <td>${item.description}</td>
-           <td><img src="${item.url}"></img></td>
-           <td><button>Edit</button></td>
-           <td><button class="delete">Delete</button></td>
-           </tr>`
-})
-
-function remove() {
-    alert('clicked ')
 }
-table.innerHTML = products.join('')
-//table.style.display = 'none'
+
 let deleteButton = document.querySelector('.delete')
+function remove(position,callback) {
+    //alert('clicked ')
+    items.splice(position,1)
+    favourite()
+    callback()
+}
 table.addEventListener('click', function(){
     if(event.target.classList.contains('delete')){
-        remove()
+        remove(event.target.value,matthew())
+        //alert(event.target.value)
     }
 })
+
