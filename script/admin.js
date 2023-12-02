@@ -20,5 +20,22 @@ function Constructor(id,name,description,price,url){
 let item2 = new Constructor(2, 'Another Nike', 'This is better than the fake', 700, 'jihuhunnu')
 //pushing items into array
 items.push(object1,item2)
+//sets the array to local storage
 localStorage.setItem('items',JSON.stringify(items))
+// sets the array from local storage to array(items) in code
+items = JSON.parse(localStorage.getItem('items'))
 
+let table = document.querySelector('table')
+let products = items.map(function(item,index){
+    console.log(item);
+    console.log(index);
+    return `<tr>
+           <td>${item.id}</td>
+           <td>${item.name}</td>
+           <td>R${item.price}</td>
+           <td>${item.description}</td>
+           <td>${item.url}</td>
+           </tr>`
+})
+
+table.innerHTML = products
